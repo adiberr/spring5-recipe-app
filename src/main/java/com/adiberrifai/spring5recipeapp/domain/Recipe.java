@@ -1,13 +1,14 @@
 package com.adiberrifai.spring5recipeapp.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String description;
     private Integer prepTime;
@@ -19,6 +20,9 @@ public class Recipe {
     //todo add
     //private Difficulty difficulty;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
     @Lob
     private Byte[] image;
 
@@ -26,11 +30,11 @@ public class Recipe {
     private Notes notes;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getDescription() {
